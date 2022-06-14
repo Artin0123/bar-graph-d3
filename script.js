@@ -54,9 +54,9 @@ function setupCanvas(barChartData) {
     header.append('tspan').text('Total revenue by genre in $US');
     header.append('tspan').text('Years:2000-2009').attr('x',0).attr('y',20).style('font-size','0.8em').style('fill','#555');
     const xAxis = d3.axisTop(xScale_v2).tickFormat(formatTicks).tickSizeInner(-chart_height).tickSizeOuter(0);
-    const xAxisDraw = this_svg.append('g').attr('class', 'x-axis').call(xAxis);
+    const xAxisDraw = this_svg.append('g').attr('class', 'x axis').call(xAxis);
     const yAxis = d3.axisLeft(yScale).tickSize(0);
-    const yAxisDraw = this_svg.append('g').attr('class', 'y-axis').call(yAxis);
+    const yAxisDraw = this_svg.append('g').attr('class', 'y axis').call(yAxis);
     yAxisDraw.selectAll('text').attr('dx','-0.6em');
 }
 
