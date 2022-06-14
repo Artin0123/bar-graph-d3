@@ -24,4 +24,18 @@ function type(d) {
         vote_count: +d.vote_count,
     }
 }
-d3.csv('movies.csv').then(res => { console.log(res); })
+function filterData(data) {
+    return data.filter(d => { return (d.release_year > 1999 && d.release_year < 2010 && d.revenue > 0 && d.budget > 0 && d.title); });
+}
+function prepareBarChartData(data) {
+    const dataMap = d3.rollup(data, v => d3.sum(v, leaf => leaf.revenue), d => d.genre);
+    console.log(dataMap);
+    const dataArray = Array.from(dataMap, d => ({ genre: d[0], revenue: d[1] }));
+    return dataArray;
+}
+function ready(movies) {
+    const moviesClean = filterData(movies);
+    const barChartData = prepareBarChartData(moviesClean).sort((a, b) => { return d3.descending(a.revenue, b.revenue); });
+    console.log(barChartData);
+}
+d3.csv('movies.csv', type).then(res => { ready(res); });
